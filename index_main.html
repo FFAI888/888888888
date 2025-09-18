@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>首页 - DApp 登录入口</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        #loginButton {
+            padding: 15px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background-color: #1e90ff;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        #loginButton:hover {
+            background-color: #0d6efd;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>欢迎来到 DApp</h1>
+    <button id="loginButton">登录</button>
+
+    <script>
+        const loginButton = document.getElementById("loginButton");
+        loginButton.addEventListener("click", () => {
+            // 点击首页登录按钮跳转到登录页面
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>
