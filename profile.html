@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>我的</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #ffe0e0, #ffb3b3);
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .bottom-nav { /* 同上 */ }
+        .nav-item { /* 同上 */ }
+        .nav-icon { /* 同上 */ }
+    </style>
+</head>
+<body>
+    <div class="content">我的页面内容</div>
+
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="location.href='index_main.html'"><div class="nav-icon">🏠</div><div>首页</div></div>
+        <div class="nav-item" onclick="location.href='group.html'"><div class="nav-icon">🤝</div><div>拼团</div></div>
+        <div class="nav-item" onclick="location.href='earn.html'"><div class="nav-icon">💰</div><div>赚币</div></div>
+        <div class="nav-item" onclick="location.href='exchange.html'"><div class="nav-icon">🔄</div><div>兑换</div></div>
+        <div class="nav-item" onclick="location.href='profile.html'"><div class="nav-icon">👤</div><div>我的</div></div>
+    </div>
+</body>
+</html>
