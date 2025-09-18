@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>钱包登录 - BSC专用</title>
+    <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.min.js"></script>
+</head>
+<body>
+    <h2>登录页面 - 仅支持 BSC 链</h2>
+    <button id="connectButton">连接钱包</button>
+    <p id="status"></p>
+
+    <script>
+        // BSC 主网链ID
+        const BSC_CHAIN_ID = "0x38"; // 56 decimal
+
+        const connectButton = document.getElementById("connectButton");
+        const status = document.getElementById("status");
+
+        async function connectWallet() {
+            if (typeof window.ethereum === "undefined") {
+                status.innerText = "请先安装 MetaMask 钱包";
+                return;
+            }
+
+            try {
+                const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+                const account = accounts[0];
+                status.innerText = "已连接账户: " + account;
+
+                checkNetwork();
+            } catch (err) {
+                status.innerText = "连接失败: " + err.message;
+            }
+        }
+
+        async function checkNetwork() {
+            const chainId = await ethereum.request({ method: 'eth_chainId' });
+            if (chainId !== BSC_CHAIN_ID) {
+                status.innerText = "请切换到 BSC 链";
+                connectButton.disabled = true;
+            } else {
+                status.innerText = "已连接 BSC 链，可操作";
+                connectButton.disabled = false;
+            }
+        }
+
+        connectButton.addEventListener("click", connectWallet);
+
+        // 实时监听用户切换网络或账户
+        if (window.ethereum) {
+            ethereum.on('chainChanged', (_chainId) => {
+                checkNetwork();
+            });
+
+            ethereum.on('accountsChanged', (_accounts) => {
+                connectWallet();
+            });
+        }
+    </script>
+</body>
+</html>
