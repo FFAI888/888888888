@@ -45,7 +45,6 @@
             transform: scale(1.05);
         }
 
-        /* 底部导航栏 */
         .bottom-nav {
             display: flex;
             justify-content: space-around;
@@ -86,9 +85,8 @@
         <button id="loginButton">登录</button>
     </div>
 
-    <!-- 底部导航栏 -->
     <div class="bottom-nav">
-        <div class="nav-item" onclick="location.href='index_main.html'">
+        <div class="nav-item" onclick="location.href='index.html'">
             <div class="nav-icon">🏠</div>
             <div>首页</div>
         </div>
@@ -113,7 +111,7 @@
     <script>
         const loginButton = document.getElementById("loginButton");
         loginButton.addEventListener("click", () => {
-            window.location.href = "index.html";
+            window.location.href = "login.html"; // 修改为 login.html
         });
     </script>
 </body>
