@@ -1,61 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>钱包登录 - BSC专用</title>
     <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f6d365, #fda085);
+            margin: 0;
+        }
+
+        h2 {
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        #connectButton {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #1e90ff;
+            color: white;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        #connectButton:hover {
+            background-color: #0d6efd;
+            transform: scale(1.05);
+        }
+
+        #connectButton:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+
+        #status {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            min-width: 300px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0,0,0,0.3);
+        }
+
+        #status.error {
+            background-color: #e74c3c;
+        }
+
+        #status.success {
+            background-color: #27ae60;
+        }
+    </style>
 </head>
 <body>
     <h2>登录页面 - 仅支持 BSC 链</h2>
     <button id="connectButton">连接钱包</button>
-    <p id="status"></p>
+    <p id="status">请连接钱包</p>
 
     <script>
         const BSC_CHAIN_ID = "0x38"; // BSC 主网
-
         const connectButton = document.getElementById("connectButton");
         const status = document.getElementById("status");
 
         async function connectWallet() {
             if (typeof window.ethereum === "undefined") {
-                status.innerText = "请先安装 MetaMask 钱包";
+                setStatus("请先安装 MetaMask 钱包", "error");
                 return;
             }
 
             try {
-                // 点击按钮才请求账户
                 const accounts = await ethereum.request({ method: "eth_requestAccounts" });
                 const account = accounts[0];
-                status.innerText = "已连接账户: " + account;
+                setStatus("已连接账户: " + account, "success");
 
-                await checkNetwork();
+                checkNetwork(account);
             } catch (err) {
-                status.innerText = "连接失败: " + err.message;
+                setStatus("连接失败: " + err.message, "error");
             }
         }
 
-        async function checkNetwork() {
+        async function checkNetwork(account) {
             const chainId = await ethereum.request({ method: 'eth_chainId' });
             if (chainId !== BSC_CHAIN_ID) {
-                status.innerText = "请切换到 BSC 链";
+                setStatus("请切换到 BSC 链", "error");
                 connectButton.disabled = true;
             } else {
-                status.innerText = "已连接 BSC 链，可操作";
+                setStatus("已连接 BSC 链，跳转确认关系页面", "success");
                 connectButton.disabled = false;
+
+                // 登录成功，跳转到确认关系页面，并传递账户地址
+                setTimeout(() => {
+                    window.location.href = "confirm.html?account=" + account;
+                }, 1500);
             }
+        }
+
+        function setStatus(message, type) {
+            status.innerText = message;
+            status.className = "";
+            if(type === "error") status.classList.add("error");
+            if(type === "success") status.classList.add("success");
         }
 
         connectButton.addEventListener("click", connectWallet);
 
-        // 监听用户切换网络或账户，但不自动登录
         if (window.ethereum) {
             ethereum.on('chainChanged', (_chainId) => {
                 checkNetwork();
             });
 
             ethereum.on('accountsChanged', (_accounts) => {
-                status.innerText = "账户已切换，请重新点击连接按钮";
-                connectButton.disabled = false;
+                connectWallet();
             });
         }
     </script>
