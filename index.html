@@ -11,8 +11,7 @@
     <p id="status"></p>
 
     <script>
-        // BSC 主网链ID
-        const BSC_CHAIN_ID = "0x38"; // 56 decimal
+        const BSC_CHAIN_ID = "0x38"; // BSC 主网
 
         const connectButton = document.getElementById("connectButton");
         const status = document.getElementById("status");
@@ -24,11 +23,12 @@
             }
 
             try {
+                // 点击按钮才请求账户
                 const accounts = await ethereum.request({ method: "eth_requestAccounts" });
                 const account = accounts[0];
                 status.innerText = "已连接账户: " + account;
 
-                checkNetwork();
+                await checkNetwork();
             } catch (err) {
                 status.innerText = "连接失败: " + err.message;
             }
@@ -47,14 +47,15 @@
 
         connectButton.addEventListener("click", connectWallet);
 
-        // 实时监听用户切换网络或账户
+        // 监听用户切换网络或账户，但不自动登录
         if (window.ethereum) {
             ethereum.on('chainChanged', (_chainId) => {
                 checkNetwork();
             });
 
             ethereum.on('accountsChanged', (_accounts) => {
-                connectWallet();
+                status.innerText = "账户已切换，请重新点击连接按钮";
+                connectButton.disabled = false;
             });
         }
     </script>
