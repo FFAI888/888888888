@@ -1,4 +1,3 @@
-// src/utils/constants.js  v0.14
 export const TOKENS = [
   { name: "USDT", address: "0x55d398326f99059ff775485246999027b3197955", decimals: 18 },
   { name: "CRC", address: "0x5b2fe2b06e714b7bea4fd35b428077d850c48087", decimals: 18 },
