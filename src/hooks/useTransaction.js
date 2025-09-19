@@ -1,4 +1,3 @@
-// src/hooks/useTransaction.js  v0.14
 import { useState } from "react";
 
 export const useTransaction = () => {
