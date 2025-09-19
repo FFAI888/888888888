@@ -1,4 +1,3 @@
-// src/components/ProgressRing.js  v0.14
 import React from "react";
 
 const ProgressRing = ({ radius, stroke, progress }) => {
