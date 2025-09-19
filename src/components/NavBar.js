@@ -1,4 +1,3 @@
-// src/components/NavBar.js  v0.14
 import React, { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 
