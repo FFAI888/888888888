@@ -1,4 +1,3 @@
-// src/pages/HomePage.js  v0.14
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { TOKENS, ERC20_ABI } from "../utils/constants";
@@ -24,13 +23,11 @@ const HomePage = () => {
   return (
     <div style={{ padding: "20px" }}>
       <h1>首页</h1>
-      <div>
-        {TOKENS.map(t => (
-          <div key={t.name} style={{ margin: "10px 0" }}>
-            {t.name}余额: {balances[t.name] || 0}
-          </div>
-        ))}
-      </div>
+      {TOKENS.map(t => (
+        <div key={t.name} style={{ margin: "10px 0" }}>
+          {t.name}余额: {balances[t.name] || 0}
+        </div>
+      ))}
     </div>
   );
 };
