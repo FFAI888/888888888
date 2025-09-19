@@ -1,4 +1,3 @@
-// src/App.js  v0.14
 import React, { useState } from "react";
 import LoginPage from "./pages/LoginPage";
 import ConfirmPage from "./pages/ConfirmPage";
