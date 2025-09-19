@@ -1,4 +1,3 @@
-// src/pages/ProfilePage.js  v0.14
 import React, { useState, useEffect } from "react";
 import { TOKENS, ERC20_ABI } from "../utils/constants";
 import { signer, getTokenBalance } from "../utils/web3";
