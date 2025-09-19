@@ -1,4 +1,3 @@
-// src/utils/web3.js  v0.14
 import { ethers } from "ethers";
 
 export let signer;
@@ -28,13 +27,11 @@ export const connectWallet = async () => {
   }
 };
 
-// 查询 ERC20 余额
 export const getTokenBalance = async (tokenContract, account, decimals) => {
   const bal = await tokenContract.balanceOf(account);
   return Math.floor(parseFloat(ethers.utils.formatUnits(bal, decimals)));
 };
 
-// 支付交易封装
 export const payToken = async (tokenContract, amount, toAddress, startTransaction, endTransaction) => {
   try {
     startTransaction(`请确认支付 ${amount.toString()} 个代币`);
