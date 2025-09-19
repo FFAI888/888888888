@@ -1,4 +1,3 @@
-// src/pages/EarnPage.js  v0.14
 import React, { useState, useEffect, useContext } from "react";
 import { ethers } from "ethers";
 import { TOKENS, ERC20_ABI } from "../utils/constants";
