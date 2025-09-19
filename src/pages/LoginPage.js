@@ -1,4 +1,3 @@
-// src/pages/LoginPage.js  v0.14
 import React from "react";
 import { connectWallet } from "../utils/web3";
 
